@@ -659,7 +659,7 @@ resize();
     requestAnimationFrame(update);
 });
 
-},{"ogl":"dMm7P","./asset-loader":"dIxix","1b9e12a9624d4bd4":"cplcF","da776e54a74737bc":"lrUC2","./PlotLine/PlotLine":"gXhiu","./Grid/Grid":"wjlxA"}],"dMm7P":[function(require,module,exports,__globalThis) {
+},{"ogl":"dMm7P","./asset-loader":"dIxix","./PlotLine/PlotLine":"gXhiu","./Grid/Grid":"wjlxA","1b9e12a9624d4bd4":"cplcF","da776e54a74737bc":"lrUC2"}],"dMm7P":[function(require,module,exports,__globalThis) {
 // Core
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -5932,48 +5932,7 @@ function loadAssets(manifest) {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cplcF":[function(require,module,exports,__globalThis) {
-module.exports = require("40c2b2cae7bda94d").getBundleURL('171qT') + "grid.0a94c637.png" + "?" + Date.now();
-
-},{"40c2b2cae7bda94d":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"lrUC2":[function(require,module,exports,__globalThis) {
-module.exports = require("d97ef155d7eeec85").getBundleURL('171qT') + "grid-blur.e9149559.png" + "?" + Date.now();
-
-},{"d97ef155d7eeec85":"lgJ39"}],"gXhiu":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gXhiu":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "PlotLine", ()=>PlotLine);
@@ -6059,11 +6018,14 @@ class PlotLine {
     }
 }
 
-},{"ogl":"dMm7P","./PlotLine.frag":"lzM3z","./PlotLine.vert":"eQnf6","./PlotLineGlow.frag":"eEnSR","simplex-noise":"FTQ4k","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../default.vert":"b2Kl3"}],"lzM3z":[function(require,module,exports,__globalThis) {
-module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform vec3 uColor;\n\nvarying vec2 vUv;\nvarying float vHeight;\nvarying float vDistFromOrigin;\n\nvoid main() {\n    // gl_FragColor.rgb = uColor\n    vec3 colorHigh = vec3(.3245, .5321, .1434);\n    vec3 colorLow = vec3(1.0, 0.1, 0.1);\n    float pct = vHeight;\n\n    gl_FragColor.rgb = mix(colorLow, colorHigh, pct);\n\n    gl_FragColor.rgb = mix(\n            gl_FragColor.rgb,\n            vec3(0.98, 0.9, 0.7),\n            clamp(2.0 + vDistFromOrigin * 3.0, 0.0, 1.0)\n        );\n\n    // the fading off effect, calc from the dist from origin of line\n    gl_FragColor.rgb = mix(\n            gl_FragColor.rgb,\n            vec3(1.0, 1.0, 1.0),\n            clamp(vDistFromOrigin * 2.0, 0.0, 1.0)\n        );\n    // gl_FragColor.rgb = vec3(pct);\n    gl_FragColor.a = vDistFromOrigin;\n}\n";
+},{"ogl":"dMm7P","./PlotLine.frag":"lzM3z","./PlotLine.vert":"eQnf6","../default.vert":"b2Kl3","./PlotLineGlow.frag":"eEnSR","simplex-noise":"FTQ4k","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lzM3z":[function(require,module,exports,__globalThis) {
+module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform vec3 uColor;\n\nvarying vec2 vUv;\nvarying float vHeight;\nvarying float vDistFromOrigin;\n\nvoid main() {\n    // gl_FragColor.rgb = uColor\n    vec3 colorHigh = vec3(.3245, .5321, .1434);\n    vec3 colorLow = vec3(1.0, 0.1, 0.1);\n    float pct = vHeight;\n\n    gl_FragColor.rgb = mix(colorLow, colorHigh, pct);\n\n    gl_FragColor.rgb = mix(\n            gl_FragColor.rgb,\n            vec3(0.98, 0.9, 0.7),\n            clamp(2.0 + vDistFromOrigin * 3.0, 0.0, 1.0)\n        );\n\n    // the fading off effect, calc from the dist from origin of line\n    gl_FragColor.rgb = mix(\n            gl_FragColor.rgb,\n            vec3(1.0, 1.0, 1.0),\n            clamp(vDistFromOrigin * 2.0, 0.0, 1.0)\n        );\n\n    // the fading off effect, calc from the dist from origin of line\n    gl_FragColor.rgb = mix(\n            vec3(1.0, 1.0, 1.0),\n            gl_FragColor.rgb,\n            clamp(100.0 + vDistFromOrigin * 50.0, 0.0, 1.0)\n        );\n\n    // gl_FragColor.rgb = vec3(pct);\n    gl_FragColor.a = vDistFromOrigin;\n}\n";
 
 },{}],"eQnf6":[function(require,module,exports,__globalThis) {
 module.exports = "precision highp float;\n#define GLSLIFY 1\n\nattribute vec3 position;\nattribute vec3 next;\nattribute vec3 prev;\nattribute vec2 uv;\nattribute float side;\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform vec2 uResolution;\nuniform float uDPR;\nuniform float uThickness;\nuniform float uMiter;\n\nvarying vec2 vUv;\nvarying float vHeight;\nvarying float vDistFromOrigin;\n\nvec4 getPosition() {\n    mat4 mvp = projectionMatrix * modelViewMatrix;\n    vec4 current = mvp * vec4(position, 1);\n    vec4 nextPos = mvp * vec4(next, 1);\n    vec4 prevPos = mvp * vec4(prev, 1);\n\n    vec2 aspect = vec2(uResolution.x / uResolution.y, 1);\n    vec2 currentScreen = current.xy / current.w * aspect;\n    vec2 nextScreen = nextPos.xy / nextPos.w * aspect;\n    vec2 prevScreen = prevPos.xy / prevPos.w * aspect;\n\n    vec2 dir1 = normalize(currentScreen - prevScreen);\n    vec2 dir2 = normalize(nextScreen - currentScreen);\n    vec2 dir = normalize(dir1 + dir2);\n\n    vec2 normal = vec2(-dir.y, dir.x);\n    normal /= mix(1.0, max(0.3, dot(normal, vec2(-dir1.y, dir1.x))), uMiter);\n    normal /= aspect;\n\n    float pixelWidthRatio = 1.0 / (uResolution.y / uDPR);\n    float pixelWidth = current.w * pixelWidthRatio;\n    normal *= pixelWidth * uThickness;\n    current.xy -= normal * side;\n\n    return current;\n}\n\nvoid main() {\n    vUv = uv;\n    vHeight = position.y * 4.0 + .6;\n    vDistFromOrigin = 1.0 - position.x;\n    gl_Position = getPosition();\n}\n";
+
+},{}],"b2Kl3":[function(require,module,exports,__globalThis) {
+module.exports = "#define GLSLIFY 1\nattribute vec2 uv;\nattribute vec3 position;\n// attribute vec3 normal;\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\n// uniform mat3 normalMatrix;\n\nvarying vec2 vUv;\n// varying vec3 vNormal;\n\nvoid main() {\n    vUv = uv;\n    // vNormal = normalize(normalMatrix * normal);\n\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}\n";
 
 },{}],"eEnSR":[function(require,module,exports,__globalThis) {
 module.exports = "precision highp float;\n#define GLSLIFY 1\n\nvarying vec2 vUv;\n\nvoid main() {\n    gl_FragColor.rgb = vec3(.5);\n    gl_FragColor.a = 1.0;\n}\n";
@@ -6667,10 +6629,7 @@ function buildPermutationTable(random) {
     return p;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2Kl3":[function(require,module,exports,__globalThis) {
-module.exports = "#define GLSLIFY 1\nattribute vec2 uv;\nattribute vec3 position;\n// attribute vec3 normal;\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\n// uniform mat3 normalMatrix;\n\nvarying vec2 vUv;\n// varying vec3 vNormal;\n\nvoid main() {\n    vUv = uv;\n    // vNormal = normalize(normalMatrix * normal);\n\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}\n";
-
-},{}],"wjlxA":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"wjlxA":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Grid", ()=>Grid);
@@ -6729,6 +6688,47 @@ module.exports = "precision highp float;\n#define GLSLIFY 1\n\nuniform sampler2D
 },{}],"aCVkq":[function(require,module,exports,__globalThis) {
 module.exports = "precision highp float;\n#define GLSLIFY 1\n\nattribute vec3 position;\nattribute vec2 uv;\n\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\n\nvarying vec2 vUv;\n\nvoid main() {\n    vUv = uv;\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}\n";
 
-},{}]},["3sN7K","kuM8f"], "kuM8f", "parcelRequire94c2")
+},{}],"cplcF":[function(require,module,exports,__globalThis) {
+module.exports = require("40c2b2cae7bda94d").getBundleURL('171qT') + "grid.0a94c637.png" + "?" + Date.now();
+
+},{"40c2b2cae7bda94d":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"lrUC2":[function(require,module,exports,__globalThis) {
+module.exports = require("d97ef155d7eeec85").getBundleURL('171qT') + "grid-blur.e9149559.png" + "?" + Date.now();
+
+},{"d97ef155d7eeec85":"lgJ39"}]},["3sN7K","kuM8f"], "kuM8f", "parcelRequire94c2")
 
 //# sourceMappingURL=index.6b815632.js.map

@@ -26,6 +26,14 @@ void main() {
             vec3(1.0, 1.0, 1.0),
             clamp(vDistFromOrigin * 2.0, 0.0, 1.0)
         );
+
+    // the fading off effect, calc from the dist from origin of line
+    gl_FragColor.rgb = mix(
+            vec3(1.0, 1.0, 1.0),
+            gl_FragColor.rgb,
+            clamp(100.0 + vDistFromOrigin * 50.0, 0.0, 1.0)
+        );
+
     // gl_FragColor.rgb = vec3(pct);
     gl_FragColor.a = vDistFromOrigin;
 }
