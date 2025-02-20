@@ -1,0 +1,20 @@
+{
+  "name": "exp-interactive-graph",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alvin Leung",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ogl": "^1.0.11",
+    "parcel": "^2.13.3",
+    "simplex-noise": "^4.0.3"
+  },
+  "devDependencies": {
+    "@parcel/transformer-glsl": "^2.13.3"
+  }
+}
